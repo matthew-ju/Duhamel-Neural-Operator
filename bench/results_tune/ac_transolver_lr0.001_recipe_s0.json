@@ -1,0 +1,39 @@
+{
+ "task": "ac",
+ "model": "transolver",
+ "seed": 0,
+ "mode": "tune",
+ "steps": 0,
+ "bs": 16,
+ "k": 4,
+ "lr": 0.001,
+ "loss": "rel",
+ "wrap": true,
+ "scale": "global",
+ "no_aug": false,
+ "bf16": false,
+ "smoke": false,
+ "fp32": false,
+ "tag": "ac_transolver_lr0.001_recipe_s0",
+ "cfg": "lr0.001_recipe",
+ "bound": 7.654844284057617,
+ "scale_field": 0.7813859581947327,
+ "params": 2184706,
+ "train_minutes": 38.209020205338796,
+ "eval": {
+  "val": {
+   "rel_final": 1.3224452406167984,
+   "rel_mean": 2.9439289581775667,
+   "corr_final": 0.03848390112441275,
+   "amp_final": 0.13911778688430787,
+   "rel_t1": 4.020745112895965,
+   "rel_final_median": 1.3249011039733887,
+   "rel_mean_median": 2.7527735233306885,
+   "corr_final_median": 0.03270743228495121,
+   "amp_final_median": 0.14221841096878052,
+   "rel_t1_median": 3.8365269899368286,
+   "n": 100
+  }
+ },
+ "eval_minutes": 0.4280934731165568
+}

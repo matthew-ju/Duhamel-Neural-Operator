@@ -1,0 +1,91 @@
+% Fig. 1 of the camera-ready: Duhamel-NO pipeline (TikZ). Build: pdflatex schematic_tikz.tex -> schematic_tikz.pdf
+% Thumbnails: ../../../make_fig1_thumbs.py (FerroX top layer, D1 held-out material c0176; ssm_gain.png = log growth factor
+% (no image in the Fourier SSM box).
+\documentclass[tikz,border=2pt]{standalone}
+\usepackage{amsmath,amssymb}
+\usetikzlibrary{positioning,arrows.meta,calc,fit,backgrounds,shapes.geometric}
+\definecolor{cin}{HTML}{8FBCDB}     % fields (inputs / outputs)
+\definecolor{cop}{HTML}{F2A65A}     % pointwise operations
+\definecolor{cfs}{HTML}{F7F3BD}     % Duhamel step / Fourier-space block
+\definecolor{cssm}{HTML}{BFD7F0}    % Fourier SSM
+\definecolor{cno}{HTML}{F6C9A8}     % neural operator
+\definecolor{csum}{HTML}{E8684A}    % sum
+\definecolor{cmat}{HTML}{CDE8C3}    % material
+\begin{document}
+\begin{tikzpicture}[
+  font=\sffamily\small, >={Stealth[length=2.2mm]},
+  circ/.style={circle, draw=black!80, line width=0.5pt, minimum size=8.5mm, inner sep=0pt},
+  fld/.style={circ, fill=cin},
+  op/.style={circ, fill=cop},
+  mat/.style={circ, fill=cmat},
+  blk/.style={draw=black!80, line width=0.5pt, rounded corners=1.5pt, minimum height=9mm, align=center, inner sep=3pt},
+  arr/.style={->, line width=0.6pt},
+  thumb/.style={inner sep=0pt, draw=black!60, line width=0.4pt}]
+
+% ============================================================== (a) rollout
+\node[font=\sffamily\normalsize] at (-0.9, 1.35) {(a)};
+\node[thumb] (p0) at (0,0) {\includegraphics[width=11mm]{P_t000.png}};
+\node[above=0.5mm of p0, font=\footnotesize] {noise $P^{0}$};
+\node[op, right=5mm of p0] (lift) {$1/P_{\mathrm S}$};
+\node[blk, fill=cfs, right=5mm of lift, minimum width=19mm] (s1) {Duhamel step};
+\node[blk, fill=cfs, right=5mm of s1, minimum width=19mm] (s2) {Duhamel step};
+\node[right=4mm of s2, font=\Large] (dots) {$\cdots$};
+\node[blk, fill=cfs, right=4mm of dots, minimum width=19mm] (s3) {Duhamel step};
+\node[op, right=5mm of s3] (proj) {$\times P_{\mathrm S}$};
+\node[thumb, right=5mm of proj] (pT) {\includegraphics[width=11mm]{P_t400.png}};
+\node[above=0.5mm of pT, font=\footnotesize] {domains $P^{T}$};
+\draw[arr] (p0) -- (lift); \draw[arr] (lift) -- (s1); \draw[arr] (s1) -- (s2); \draw[arr] (s2) -- (dots);
+\draw[arr] (dots) -- (s3); \draw[arr] (s3) -- (proj); \draw[arr] (proj) -- (pT);
+% intermediate frames above the chain (the rollout)
+\node[thumb, anchor=south] (p5) at ($($(s1.east)!0.5!(s2.west)$)+(0,1.5mm)$) {\includegraphics[width=7mm]{P_t005.png}};
+\node[thumb, anchor=south] (p20) at ($(dots.north)+(0,0.5mm)$) {\includegraphics[width=7mm]{P_t020.png}};
+% material input (a bus above the frames)
+\node[mat, above=8.5mm of s2] (m) {$\alpha,\beta,\gamma$};
+\coordinate (busL) at ($(lift.north)+(0,0)$);
+\draw[black!65, line width=0.6pt] (m.west) -| ($(lift.north)+(0,4mm)$);
+\draw[black!65, line width=0.6pt] (m.east) -| ($(proj.north)+(0,4mm)$);
+\foreach \n in {lift, s1, s3, proj} { \draw[arr, black!65] (\n.north |- m) -- (\n.north); }
+\draw[arr, black!65] (m) -- (s2.north);
+
+% ============================================================== (b) one Duhamel step
+\begin{scope}[yshift=-3.35cm]
+\node[font=\sffamily\normalsize] at (-0.9, 0.9) {(b)};
+\node[fld] (vn) at (0.2,-0.9) {$v_n$};
+% Fourier-SSM path (top)
+\node[op, fill=cfs] (F1) at (2.0,0.25) {$\mathcal F$};
+\node[blk, fill=cssm, right=6mm of F1, minimum width=26mm, minimum height=11mm] (ssm) {Fourier SSM\\[-1pt]$e^{\theta L(k)}$};
+\node[mat, above=1.5mm of ssm] (al) {$\alpha$};
+\draw[arr, black!65] (al) -- (ssm);
+% neural-operator path (bottom): U-shaped stack of blocks
+\coordinate (u0) at (2.15,-1.30);
+% blocks: name / x / y / width / height   (size shrinks with resolution)
+\foreach \n/\x/\y/\w/\h in {e0/0/0/0.32/0.80, e1/0.66/-0.52/0.27/0.55, mid/1.32/-0.98/0.22/0.36, d1/1.98/-0.52/0.27/0.55, d0/2.64/0/0.32/0.80} {
+  \node[draw=black!80, fill=cno, line width=0.4pt, minimum width=\w cm, minimum height=\h cm, inner sep=0pt] (\n) at ($(u0)+(\x,\y)$) {};
+}
+\foreach \a/\b in {e0/e1, e1/mid, mid/d1, d1/d0} { \draw[black!70, line width=0.45pt, ->, >={Stealth[length=1.3mm]}] (\a) -- (\b); }
+\draw[black!45, line width=0.45pt, dashed, ->, >={Stealth[length=1.3mm]}] (e0) -- (d0);
+\draw[black!45, line width=0.45pt, dashed, ->, >={Stealth[length=1.3mm]}] (e1) -- (d1);
+\node[fit=(e0)(d0)(mid), draw=black!80, dashed, rounded corners=2pt, inner sep=1.6mm] (no) {};
+\node[below=0.5mm of no, font=\footnotesize] (nolab) {UNO $N_\psi$};
+\node[mat, left=7mm of no.west, anchor=east, yshift=-7mm] (bg) {$\alpha,\beta,\gamma$};
+\draw[arr, black!65] (bg) -- (no.south west);
+\node[op, fill=cfs, right=5mm of no] (F2) {$\mathcal F$};
+\node[op, right=5mm of F2] (phi) {$\theta\varphi_1$};
+% sum and output
+\node[circ, fill=csum, minimum size=8mm] (plus) at (9.6,-0.9) {\Large$+$};
+\node[op, fill=cfs, right=5mm of plus] (Fi) {$\mathcal F^{-1}$};
+\node[fld, right=5mm of Fi] (vn1) {$v_{n+1}$};
+% wiring
+\draw[arr] (vn) |- (F1); \draw[arr] (F1) -- (ssm);
+\draw[arr] (vn) |- (no.west); \draw[arr] (no) -- (F2); \draw[arr] (F2) -- (phi);
+\draw[arr] (ssm.east) -| (plus.north); \draw[arr] (phi.east) -| (plus.south);
+\draw[arr] (plus) -- (Fi); \draw[arr] (Fi) -- (vn1);
+% frame around (b) and zoom lines from the first step of (a)
+\begin{scope}[on background layer]
+\node[fit=(vn)(al)(F1)(ssm)(no)(nolab)(bg)(phi)(plus)(vn1), draw=black!80, line width=0.5pt, inner sep=2mm] (box) {};
+\end{scope}
+\end{scope}
+\draw[densely dashed, black!60] (s1.south west) -- (box.north west);
+\draw[densely dashed, black!60] (s1.south east) -- (box.north east);
+\end{tikzpicture}
+\end{document}
