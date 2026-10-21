@@ -88,12 +88,12 @@ Figures 1 and 2 show actual fields, so they need the data (step 3): `bash script
 
 ## Step 3. Download the data and the trained models
 
-The data are on Hugging Face: **https://huggingface.co/datasets/<HF_USER>/ferroelectric-tdgl-bench**
+The data are on Hugging Face: **https://huggingface.co/datasets/matthewju/ferroelectric-tdgl-bench**
 (DOI: <DOI>). Download them and link them into the layout of step 1. The symlinks copy nothing.
 
 ```bash
-pip install -U huggingface_hub
-huggingface-cli download <HF_USER>/ferroelectric-tdgl-bench --repo-type dataset --local-dir ./ferro_data
+pip install -U huggingface_hub   # provides the hf command
+hf download matthewju/ferroelectric-tdgl-bench --repo-type dataset --local-dir ./ferro_data
 #   only the test sets: add  --include "d1/metadata.csv" "d2/*"
 bash scripts/link_hf_data.sh ./ferro_data
 ```
