@@ -89,7 +89,7 @@ Figures 1 and 2 show actual fields, so they need the data (step 3): `bash script
 ## Step 3. Download the data and the trained models
 
 The data are on Hugging Face: **https://huggingface.co/datasets/matthewju/ferroelectric-tdgl-bench**
-(DOI: <DOI>). Download them and link them into the layout of step 1. The symlinks copy nothing.
+(DOI: [10.57967/hf/11169](https://doi.org/10.57967/hf/11169)). Download them and link them into the layout of step 1. The symlinks copy nothing.
 
 ```bash
 pip install -U huggingface_hub   # provides the hf command
@@ -99,8 +99,8 @@ bash scripts/link_hf_data.sh ./ferro_data
 ```
 
 The released files hold only the 10 ferroelectric layers, as `(401, 10, 64, 64)` arrays. The loaders read both these
-and the raw `(64, 64, 18, 401)` FerroX extracts. The trained checkpoints are at <CHECKPOINT LINK>; put them in
-`$SCRATCH/bench_ckpt/`.
+and the raw `(64, 64, 18, 401)` FerroX extracts. Trained checkpoints are not included;
+step 4 retrains every model (they are written to `$SCRATCH/bench_ckpt/`).
 
 Then re-evaluate the released models and rebuild the tables:
 
@@ -209,6 +209,15 @@ benchmark/        ferro_bench.py: loader and metrics for the released benchmark
   author    = {Ju, Matthew and Tang, Yingheng and Wang, Kang'an and Sha, Haozhi},
   booktitle = {AI for Accelerated Materials Design (AI4Mat) Workshop, NeurIPS},
   year      = {2026}
+}
+
+@misc{ju2026ferrobench,
+  title     = {Ferroelectric {TDGL} Phase-Field Benchmark},
+  author    = {Ju, Matthew and Tang, Yingheng and Wang, Kang'an and Sha, Haozhi},
+  year      = {2026},
+  publisher = {Hugging Face},
+  doi       = {10.57967/hf/11169},
+  url       = {https://huggingface.co/datasets/matthewju/ferroelectric-tdgl-bench}
 }
 ```
 
