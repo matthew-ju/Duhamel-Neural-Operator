@@ -84,6 +84,9 @@ def frames(tr, t0, n, stride=1):
         if len(_MM) > 256:
             _MM.clear()
         m = _MM[tr.path] = np.load(tr.path, mmap_mode="r")
+    if m.shape[1] == 10:                     # released benchmark layout (T, Z, H, W), ferroelectric layers only
+        a = np.asarray(m[t0:t0 + (n - 1) * stride + 1:stride], dtype=np.float32)
+        return np.ascontiguousarray(a)[:, None] / al.P_NORM
     zl, zh = ZSL[tr.geo]
     a = np.asarray(m[:, :, zl:zh, t0:t0 + (n - 1) * stride + 1:stride], dtype=np.float32)   # (H,W,Z,n)
     return np.ascontiguousarray(a.transpose(3, 2, 0, 1))[:, None] / al.P_NORM

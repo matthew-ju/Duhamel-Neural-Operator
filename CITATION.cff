@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use this code or the benchmark, please cite the paper."
+title: "Duhamel Neural Operator for Learning Phase-Field Dynamics"
+authors:
+  - family-names: Ju
+    given-names: Matthew
+  - family-names: Tang
+    given-names: Yingheng
+  - family-names: Wang
+    given-names: "Kang'an"
+  - family-names: Sha
+    given-names: Haozhi
+repository-code: "https://github.com/matthew-ju/Duhamel-Neural-Operator"
+preferred-citation:
+  type: conference-paper
+  title: "Duhamel Neural Operator for Learning Phase-Field Dynamics"
+  authors:
+    - family-names: Ju
+      given-names: Matthew
+    - family-names: Tang
+      given-names: Yingheng
+    - family-names: Wang
+      given-names: "Kang'an"
+    - family-names: Sha
+      given-names: Haozhi
+  conference:
+    name: "AI for Accelerated Materials Design (AI4Mat) Workshop, NeurIPS 2026"
+  year: 2026

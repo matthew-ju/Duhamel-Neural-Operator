@@ -88,10 +88,19 @@ Figures 1 and 2 show actual fields, so they need the data (step 3): `bash script
 
 ## Step 3. Download the data and the trained models
 
+The data are on Hugging Face: **https://huggingface.co/datasets/<HF_USER>/ferroelectric-tdgl-bench**
+(DOI: <DOI>). Download them and link them into the layout of step 1. The symlinks copy nothing.
+
 ```bash
-# <DATA LINK: to be added when the data are published>
-# untar every archive into $SCRATCH so that the layout matches step 1
+pip install -U huggingface_hub
+huggingface-cli download <HF_USER>/ferroelectric-tdgl-bench --repo-type dataset --local-dir ./ferro_data
+#   only the test sets: add  --include "d1/metadata.csv" "d2/*"
+bash scripts/link_hf_data.sh ./ferro_data
 ```
+
+The released files hold only the 10 ferroelectric layers, as `(401, 10, 64, 64)` arrays. The loaders read both these
+and the raw `(64, 64, 18, 401)` FerroX extracts. The trained checkpoints are at <CHECKPOINT LINK>; put them in
+`$SCRATCH/bench_ckpt/`.
 
 Then re-evaluate the released models and rebuild the tables:
 
@@ -159,6 +168,25 @@ The materials were sampled by `abg_grid.py` (D1, Latin hypercube → `abg_grid.j
 
 ---
 
+## The benchmark
+
+D1, D2 and the hysteresis loops are released as an open benchmark for ferroelectric phase-field dynamics
+(paper, Appendix F). The dataset card on Hugging Face describes the format, splits and protocol.
+`benchmark/ferro_bench.py` needs only numpy. It loads trajectories and computes the paper's metrics:
+
+```python
+import sys; sys.path.insert(0, "benchmark"); import ferro_bench as fb
+fb.ROOT = "./ferro_data"
+test = fb.metadata("d1", ["test_interior", "test_edge"])     # 256 held-out materials
+true = fb.load("d1", test[0])                                 # (401, 10, 64, 64), C/m^2
+fb.score(my_rollout, true)                                    # corr and rel. L2 at frames 1 and 400
+```
+
+Protocol:
+- Roll out from the frame-0 field alone, conditioned on (α, β, γ) and `dt_frame`.
+- Train on D1 `train` and select hyperparameters on `val`.
+- Report D1 `test_interior` + `test_edge`, and all of D2 zero-shot.
+
 ## Repository layout
 
 ```
@@ -170,6 +198,7 @@ data/             FerroX job lists for D1 and D2
 ferrox_inputs/    FerroX input template
 abg_*.py, geo/, ml_units/, tdgl_*.py    physics laws, material units, data index, Allen–Cahn generator
 release/          build_train_cache.py
+benchmark/        ferro_bench.py: loader and metrics for the released benchmark
 ```
 
 ## Citation
@@ -177,7 +206,7 @@ release/          build_train_cache.py
 ```bibtex
 @inproceedings{ju2026duhamel,
   title     = {Duhamel Neural Operator for Learning Phase-Field Dynamics},
-  author    = {Ju, Matthew and Tang, Yingheng and Wang, Kang'an and Sha, Haozhi and Nonaka, Andrew},
+  author    = {Ju, Matthew and Tang, Yingheng and Wang, Kang'an and Sha, Haozhi},
   booktitle = {AI for Accelerated Materials Design (AI4Mat) Workshop, NeurIPS},
   year      = {2026}
 }
@@ -185,4 +214,4 @@ release/          build_train_cache.py
 
 ## License
 
-<to be added after LBNL Intellectual Property Office approval>
+Data: CC BY 4.0 (see the dataset card). Code: <to be added after LBNL Intellectual Property Office approval>

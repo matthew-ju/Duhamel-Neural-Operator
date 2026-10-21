@@ -227,7 +227,10 @@ def _mm(path):
 
 def frame(traj, t):
     """(1,Z,H,W) float32 normalised field at frame t."""
-    a = _mm(traj.path)[:, :, Z_LO:Z_HI, t]        # (H,W,Z)
+    m = _mm(traj.path)
+    if m.shape[1] == 10:                          # released benchmark layout (T, Z, H, W)
+        return np.ascontiguousarray(m[t], dtype=np.float32)[None] / P_NORM
+    a = m[:, :, Z_LO:Z_HI, t]                     # (H,W,Z)
     return np.ascontiguousarray(a.transpose(2, 0, 1))[None] / P_NORM
 
 
