@@ -1,0 +1,39 @@
+{
+ "task": "ac",
+ "model": "transolver",
+ "seed": 0,
+ "mode": "tune",
+ "steps": 0,
+ "bs": 16,
+ "k": 4,
+ "lr": 0.001,
+ "loss": "mse",
+ "wrap": false,
+ "scale": "global",
+ "no_aug": false,
+ "bf16": false,
+ "smoke": false,
+ "fp32": false,
+ "tag": "ac_transolver_lr0.001_mse_s0",
+ "cfg": "lr0.001_mse",
+ "bound": 7.654844284057617,
+ "scale_field": 0.7813859581947327,
+ "params": 2178753,
+ "train_minutes": 39.772381957372026,
+ "eval": {
+  "val": {
+   "rel_final": 1.3293246978521347,
+   "rel_mean": 5.313740665912628,
+   "corr_final": 0.03180724933425793,
+   "amp_final": 0.06880919933319092,
+   "rel_t1": 4.354366654157639,
+   "rel_final_median": 1.33918297290802,
+   "rel_mean_median": 4.034415245056152,
+   "corr_final_median": 0.01578087778761983,
+   "amp_final_median": 0.0588497519493103,
+   "rel_t1_median": 4.114840984344482,
+   "n": 100
+  }
+ },
+ "eval_minutes": 0.43257974783579506
+}

@@ -1,0 +1,39 @@
+{
+ "task": "ac",
+ "model": "tfno",
+ "seed": 0,
+ "mode": "tune",
+ "steps": 0,
+ "bs": 16,
+ "k": 4,
+ "lr": 0.001,
+ "loss": "rel",
+ "wrap": true,
+ "scale": "global",
+ "no_aug": false,
+ "bf16": false,
+ "smoke": false,
+ "fp32": false,
+ "tag": "ac_tfno_lr0.001_recipe_s0",
+ "cfg": "lr0.001_recipe",
+ "bound": 7.654844284057617,
+ "scale_field": 0.7813859581947327,
+ "params": 1028298,
+ "train_minutes": 4.2804110765457155,
+ "eval": {
+  "val": {
+   "rel_final": 0.25547419576905667,
+   "rel_mean": 0.19000065926462412,
+   "corr_final": 0.8570295189833118,
+   "amp_final": 0.012885175943374634,
+   "rel_t1": 0.4233627094328403,
+   "rel_final_median": 0.2002011463046074,
+   "rel_mean_median": 0.17201093584299088,
+   "corr_final_median": 0.9660840332508087,
+   "amp_final_median": 0.006358683109283447,
+   "rel_t1_median": 0.46520645916461945,
+   "n": 100
+  }
+ },
+ "eval_minutes": 0.05528336763381958
+}

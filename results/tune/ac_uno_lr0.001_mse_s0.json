@@ -1,0 +1,39 @@
+{
+ "task": "ac",
+ "model": "uno",
+ "seed": 0,
+ "mode": "tune",
+ "steps": 0,
+ "bs": 16,
+ "k": 4,
+ "lr": 0.001,
+ "loss": "mse",
+ "wrap": false,
+ "scale": "global",
+ "no_aug": false,
+ "bf16": false,
+ "smoke": false,
+ "fp32": false,
+ "tag": "ac_uno_lr0.001_mse_s0",
+ "cfg": "lr0.001_mse",
+ "bound": 7.654844284057617,
+ "scale_field": 0.7813859581947327,
+ "params": 9491425,
+ "train_minutes": 3.6598305821418764,
+ "eval": {
+  "val": {
+   "rel_final": 1.5682425662875175,
+   "rel_mean": 2.120474977493286,
+   "corr_final": 0.2117494975405711,
+   "amp_final": 0.588504786491394,
+   "rel_t1": 3.930079151391983,
+   "rel_final_median": 1.5417038798332214,
+   "rel_mean_median": 1.8891162872314453,
+   "corr_final_median": 0.2050478607416153,
+   "amp_final_median": 0.5949845314025879,
+   "rel_t1_median": 3.7497849464416504,
+   "n": 100
+  }
+ },
+ "eval_minutes": 0.043142799536387125
+}

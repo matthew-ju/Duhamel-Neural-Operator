@@ -1,0 +1,98 @@
+{
+ "gpu": "NVIDIA A100-SXM4-40GB",
+ "ferrox_s_median": 196.0,
+ "ferrox_s_range": [
+  147.0,
+  318.5
+ ],
+ "models": {
+  "Duhamel-UNO (ours)": {
+   "params": 9494841,
+   "s_per_traj_b1": 1.6641597747802734,
+   "speedup_b1": 117.77715275318367,
+   "s_per_traj_b16": 0.10807420313358307,
+   "speedup_b16": 1813.568773278281
+  },
+  "F-FNO + recipe": {
+   "params": 1194251,
+   "s_per_traj_b1": 2.193688154220581,
+   "speedup_b1": 89.34724820522128,
+   "s_per_traj_b16": 0.1535632312297821,
+   "speedup_b16": 1276.3471986775157
+  },
+  "U-Net + recipe": {
+   "params": 10947083,
+   "s_per_traj_b1": 2.99873685836792,
+   "speedup_b1": 65.36085333831997,
+   "s_per_traj_b16": 0.18864591419696808,
+   "speedup_b16": 1038.983541384063
+  },
+  "UNO + recipe": {
+   "params": 9494795,
+   "s_per_traj_b1": 1.5119001865386963,
+   "speedup_b1": 129.63818759009294,
+   "s_per_traj_b16": 0.0950918197631836,
+   "speedup_b16": 2061.1657289566847
+  },
+  "CNextU-Net + recipe": {
+   "params": 9926715,
+   "s_per_traj_b1": 2.436478853225708,
+   "speedup_b1": 80.44395695883479,
+   "s_per_traj_b16": 0.18049952387809753,
+   "speedup_b16": 1085.8754404935212
+  },
+  "CNO + recipe": {
+   "params": 5497659,
+   "s_per_traj_b1": 3.6111879348754883,
+   "speedup_b1": 54.27576839939735,
+   "s_per_traj_b16": 0.2785279154777527,
+   "speedup_b16": 703.699662074466
+  },
+  "TFNO + recipe": {
+   "params": 1030867,
+   "s_per_traj_b1": 1.9097130298614502,
+   "speedup_b1": 102.6332212930546,
+   "s_per_traj_b16": 0.1213933676481247,
+   "speedup_b16": 1614.5857372384037
+  },
+  "FNO + recipe": {
+   "params": 2416203,
+   "s_per_traj_b1": 1.2979438304901123,
+   "speedup_b1": 151.00807553897698,
+   "s_per_traj_b16": 0.08257007598876953,
+   "speedup_b16": 2373.7413058292236
+  },
+  "Duhamel, learned linear (ours)": {
+   "params": 5011751,
+   "s_per_traj_b1": 2.398320198059082,
+   "speedup_b1": 81.72386662907618,
+   "s_per_traj_b16": 0.15196917951107025,
+   "speedup_b16": 1289.73519914097
+  },
+  "Transolver + recipe": {
+   "params": 2190155,
+   "s_per_traj_b1": 2.367400646209717,
+   "speedup_b1": 82.79122518353714,
+   "s_per_traj_b16": 0.48192812502384186,
+   "speedup_b16": 406.6996504723677
+  },
+  "ACDM": {
+   "params": 10944458,
+   "s_per_traj_b1": 58.88398742675781,
+   "speedup_b1": 3.3285789323250636,
+   "s_per_traj_b16": 4.086229577660561,
+   "speedup_b16": 47.9659784833268
+  },
+  "PDE-Refiner": {
+   "params": 10944458,
+   "s_per_traj_b1": 11.90121340751648,
+   "speedup_b1": 16.468908949755644,
+   "s_per_traj_b16": 0.8199961632490158,
+   "speedup_b16": 239.02550863579938
+  },
+  "production FNO (ours, earlier)": {
+   "s_per_traj_b1": 1.5663912296295166,
+   "speedup_b1": 125.12838190900621
+  }
+ }
+}

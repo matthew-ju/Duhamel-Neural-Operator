@@ -1,0 +1,39 @@
+{
+ "task": "ac",
+ "model": "tfno",
+ "seed": 0,
+ "mode": "tune",
+ "steps": 0,
+ "bs": 16,
+ "k": 4,
+ "lr": 0.0003,
+ "loss": "mse",
+ "wrap": false,
+ "scale": "global",
+ "no_aug": false,
+ "bf16": false,
+ "smoke": false,
+ "fp32": false,
+ "tag": "ac_tfno_lr0.0003_mse_s0",
+ "cfg": "lr0.0003_mse",
+ "bound": 7.654844284057617,
+ "scale_field": 0.7813859581947327,
+ "params": 1025481,
+ "train_minutes": 4.028316239515941,
+ "eval": {
+  "val": {
+   "rel_final": 1.2241774837020785,
+   "rel_mean": 2.3723403888940813,
+   "corr_final": 0.1418687226833979,
+   "amp_final": 0.0722068029642105,
+   "rel_t1": 3.7982831490039826,
+   "rel_final_median": 1.3639652729034424,
+   "rel_mean_median": 2.0587905645370483,
+   "corr_final_median": 0.115304846316576,
+   "amp_final_median": 0.06312441825866699,
+   "rel_t1_median": 3.6121506690979004,
+   "n": 100
+  }
+ },
+ "eval_minutes": 0.054480091730753584
+}

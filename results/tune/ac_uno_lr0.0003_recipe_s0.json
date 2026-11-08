@@ -1,0 +1,39 @@
+{
+ "task": "ac",
+ "model": "uno",
+ "seed": 0,
+ "mode": "tune",
+ "steps": 0,
+ "bs": 16,
+ "k": 4,
+ "lr": 0.0003,
+ "loss": "rel",
+ "wrap": true,
+ "scale": "global",
+ "no_aug": false,
+ "bf16": false,
+ "smoke": false,
+ "fp32": false,
+ "tag": "ac_uno_lr0.0003_recipe_s0",
+ "cfg": "lr0.0003_recipe",
+ "bound": 7.654844284057617,
+ "scale_field": 0.7813859581947327,
+ "params": 9493090,
+ "train_minutes": 4.189998535315196,
+ "eval": {
+  "val": {
+   "rel_final": 0.42467733966186644,
+   "rel_mean": 0.3177393629401922,
+   "corr_final": 0.7521047458459711,
+   "amp_final": 0.03607999861240387,
+   "rel_t1": 0.3895554494857788,
+   "rel_final_median": 0.33179551362991333,
+   "rel_mean_median": 0.25535574555397034,
+   "corr_final_median": 0.8980199098587036,
+   "amp_final_median": 0.01689380407333374,
+   "rel_t1_median": 0.35719990730285645,
+   "n": 100
+  }
+ },
+ "eval_minutes": 0.05093921422958374
+}

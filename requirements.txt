@@ -1,0 +1,12 @@
+# Python 3.12; CUDA 12.9 build of PyTorch (NERSC: module load pytorch/2.11.0)
+torch==2.11.0
+numpy==2.4.3
+scipy==1.17.1
+matplotlib==3.10.9
+neuraloperator==2.0.0
+einops==0.8.2
+tensorly==0.9.0
+h5py==3.16.0
+pillow==12.2.0
+# Poseidon baseline only
+transformers==5.8.0

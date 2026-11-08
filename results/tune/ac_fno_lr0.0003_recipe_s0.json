@@ -1,0 +1,39 @@
+{
+ "task": "ac",
+ "model": "fno",
+ "seed": 0,
+ "mode": "tune",
+ "steps": 0,
+ "bs": 16,
+ "k": 4,
+ "lr": 0.0003,
+ "loss": "rel",
+ "wrap": true,
+ "scale": "global",
+ "no_aug": false,
+ "bf16": false,
+ "smoke": false,
+ "fp32": false,
+ "tag": "ac_fno_lr0.0003_recipe_s0",
+ "cfg": "lr0.0003_recipe",
+ "bound": 7.654844284057617,
+ "scale_field": 0.7813859581947327,
+ "params": 2413634,
+ "train_minutes": 3.5676352977752686,
+ "eval": {
+  "val": {
+   "rel_final": 0.2867792253475636,
+   "rel_mean": 0.21501722000539303,
+   "corr_final": 0.8103832886743726,
+   "amp_final": 0.019627302885055542,
+   "rel_t1": 0.4871934652328491,
+   "rel_final_median": 0.22871950268745422,
+   "rel_mean_median": 0.20447372645139694,
+   "corr_final_median": 0.951119601726532,
+   "amp_final_median": 0.016011446714401245,
+   "rel_t1_median": 0.49864284694194794,
+   "n": 100
+  }
+ },
+ "eval_minutes": 0.05195537805557251
+}

@@ -1,0 +1,39 @@
+{
+ "task": "ac",
+ "model": "poseidon",
+ "seed": 0,
+ "mode": "tune",
+ "steps": 2000,
+ "bs": 16,
+ "k": 4,
+ "lr": 0.0001,
+ "loss": "rel",
+ "wrap": false,
+ "scale": "global",
+ "no_aug": false,
+ "bf16": false,
+ "smoke": false,
+ "fp32": false,
+ "tag": "ac_poseidon_lr0.0001_rel_s0",
+ "cfg": "lr0.0001_rel",
+ "bound": 7.654844284057617,
+ "scale_field": 0.7813859581947327,
+ "params": 20773298,
+ "train_minutes": 22.923010913530984,
+ "eval": {
+  "val": {
+   "rel_final": 1.4671563857793808,
+   "rel_mean": 1.2134671574831009,
+   "corr_final": 0.02341166630739767,
+   "amp_final": 0.3175679284334183,
+   "rel_t1": 2.0285106003284454,
+   "rel_final_median": 1.4483017325401306,
+   "rel_mean_median": 1.170678198337555,
+   "corr_final_median": 0.013651109300553799,
+   "amp_final_median": 0.3075107932090759,
+   "rel_t1_median": 1.8948326110839844,
+   "n": 100
+  }
+ },
+ "eval_minutes": 0.41594672203063965
+}
