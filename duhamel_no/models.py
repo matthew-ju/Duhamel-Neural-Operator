@@ -641,7 +641,7 @@ class DuhamelTDGL(nn.Module):
         import sys as _s
         _s.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "q_probe", "volt_sweep"))
         from duhamel_hyst import DuhamelHyst
-        import train_hyst as th
+        import hyst_data as th
         self.m = DuhamelHyst(); self.th = th; self.scale = float(scale)
 
     def forward(self, x, aux):

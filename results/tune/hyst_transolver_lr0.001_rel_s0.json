@@ -1,0 +1,43 @@
+{
+ "task": "hyst",
+ "model": "transolver",
+ "seed": 0,
+ "mode": "tune",
+ "steps": 0,
+ "bs": 16,
+ "k": 4,
+ "lr": 0.001,
+ "loss": "rel",
+ "wrap": false,
+ "scale": "global",
+ "no_aug": false,
+ "bf16": false,
+ "smoke": false,
+ "fp32": false,
+ "tag": "hyst_transolver_lr0.001_rel_s0",
+ "cfg": "lr0.001_rel",
+ "bound": 8.818359375,
+ "scale_field": 0.7077219486236572,
+ "params": 2184714,
+ "train_minutes": 32.12609766721725,
+ "eval": {
+  "val": {
+   "loop_err": 0.2917564883828163,
+   "field_corr": 0.08574187367688865,
+   "relL2_mean": 1.1518575370311737,
+   "coercive_exact": 0.1,
+   "rel_final": 1.0348163366317749,
+   "corr_final": 0.2648654878139496,
+   "rel_t1": 10.316641712188721,
+   "loop_err_median": 0.2148802950978279,
+   "field_corr_median": 0.099463577196002,
+   "relL2_mean_median": 1.0659390091896057,
+   "coercive_exact_median": 0.0,
+   "rel_final_median": 1.046572208404541,
+   "corr_final_median": 0.24513428658246994,
+   "rel_t1_median": 9.276479721069336,
+   "n": 10
+  }
+ },
+ "eval_minutes": 0.9027043342590332
+}

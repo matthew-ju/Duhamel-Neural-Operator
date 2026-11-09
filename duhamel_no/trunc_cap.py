@@ -8,7 +8,7 @@ Z x Z matrix outside has  rho_K(n)^2 = 1 - sum_{k notin K, k!=0} ||G_n(k) - C||_
 C = mean_{k notin K} G_n(k),  G_n(k) = exp(n theta L(k)) (per |k| bin).  Averaged over the 256 held-out D1 materials.
 Mode sets (64x64 grid, integer kx, ky): neuralop FNO/TFNO n_modes=(16,16) -> kx in [-8,8), ky in [-8,8];
 the 16-mode box of UNO's spectral convolutions -> kx in [-16,16), ky in [-15,15].
-Out: paper_tmlr/data/theory_cap_bank.json
+Out: results/analysis/theory_cap_bank.json
 """
 import json, math, os, sys
 import numpy as np

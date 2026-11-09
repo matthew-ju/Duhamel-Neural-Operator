@@ -84,7 +84,7 @@ def main():
         trs = task.train; vals = [task.load(p) for p in task.t_val]
         get = lambda L: L["P"][:9, 0].astype(np.float64) if L["P"] is not None else None
         # training loops' P was dropped to save memory: reload them
-        trs = [task.load(os.path.join(os.environ["SCRATCH"], os.environ.get("HYST_DIR", "ferrox_hyst2"), "h_e%d_%s_V%.1f_s%d.npz" % (L["eps"], L["tag"], L["vmax"], L["seed"])))
+        trs = [task.load(os.path.join(os.environ["SCRATCH"], os.environ.get("HYST_DIR", "ferrox_hyst_closed2"), "h_e%d_%s_V%.1f_s%d.npz" % (L["eps"], L["tag"], L["vmax"], L["seed"])))
                for L in trs]
         th = lambda L: float(al.theta(L["mat"][0], L["mat"][3])); alp = lambda L: float(L["mat"][0])
     A = np.array([alp(t) for t in trs]); Gs = []; OK = []

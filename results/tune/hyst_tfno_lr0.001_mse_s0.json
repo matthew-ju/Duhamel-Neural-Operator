@@ -1,0 +1,43 @@
+{
+ "task": "hyst",
+ "model": "tfno",
+ "seed": 0,
+ "mode": "tune",
+ "steps": 0,
+ "bs": 16,
+ "k": 4,
+ "lr": 0.001,
+ "loss": "mse",
+ "wrap": false,
+ "scale": "global",
+ "no_aug": false,
+ "bf16": false,
+ "smoke": false,
+ "fp32": false,
+ "tag": "hyst_tfno_lr0.001_mse_s0",
+ "cfg": "lr0.001_mse",
+ "bound": 8.818359375,
+ "scale_field": 0.7077219486236572,
+ "params": 1028050,
+ "train_minutes": 3.964260439078013,
+ "eval": {
+  "val": {
+   "loop_err": 0.29623154997825624,
+   "field_corr": 0.06873313521035015,
+   "relL2_mean": 1.5625628232955933,
+   "coercive_exact": 0.0,
+   "rel_final": 1.9637131631374358,
+   "corr_final": 0.3027405239641666,
+   "rel_t1": 10.937470817565918,
+   "loop_err_median": 0.2851911932229996,
+   "field_corr_median": 0.07526755505241453,
+   "relL2_mean_median": 1.3454392552375793,
+   "coercive_exact_median": 0.0,
+   "rel_final_median": 1.1379786729812622,
+   "corr_final_median": 0.31530405580997467,
+   "rel_t1_median": 10.14290714263916,
+   "n": 10
+  }
+ },
+ "eval_minutes": 0.8318503419558207
+}

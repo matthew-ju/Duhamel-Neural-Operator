@@ -1,0 +1,43 @@
+{
+ "task": "hyst",
+ "model": "poseidon",
+ "seed": 0,
+ "mode": "tune",
+ "steps": 2000,
+ "bs": 16,
+ "k": 4,
+ "lr": 3e-05,
+ "loss": "rel",
+ "wrap": false,
+ "scale": "global",
+ "no_aug": false,
+ "bf16": false,
+ "smoke": false,
+ "fp32": false,
+ "tag": "hyst_poseidon_lr3e-05_rel_s0",
+ "cfg": "lr3e-05_rel",
+ "bound": 8.818359375,
+ "scale_field": 0.7077219486236572,
+ "params": 20791142,
+ "train_minutes": 26.431044189135232,
+ "eval": {
+  "val": {
+   "loop_err": 0.7020131886005402,
+   "field_corr": 0.01735516023822129,
+   "relL2_mean": 5.927473354339599,
+   "coercive_exact": 0.0,
+   "rel_final": 8.507726526260376,
+   "corr_final": 0.049805615842342374,
+   "rel_t1": 9.807351970672608,
+   "loop_err_median": 0.7972861528396606,
+   "field_corr_median": 0.01711981832049787,
+   "relL2_mean_median": 5.914196014404297,
+   "coercive_exact_median": 0.0,
+   "rel_final_median": 8.814274787902832,
+   "corr_final_median": 0.060126710683107376,
+   "rel_t1_median": 9.468470573425293,
+   "n": 10
+  }
+ },
+ "eval_minutes": 7.918152006467183
+}

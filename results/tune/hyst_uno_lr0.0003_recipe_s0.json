@@ -1,0 +1,43 @@
+{
+ "task": "hyst",
+ "model": "uno",
+ "seed": 0,
+ "mode": "tune",
+ "steps": 0,
+ "bs": 16,
+ "k": 4,
+ "lr": 0.0003,
+ "loss": "rel",
+ "wrap": true,
+ "scale": "global",
+ "no_aug": false,
+ "bf16": false,
+ "smoke": false,
+ "fp32": false,
+ "tag": "hyst_uno_lr0.0003_recipe_s0",
+ "cfg": "lr0.0003_recipe",
+ "bound": 8.818359375,
+ "scale_field": 0.7077219486236572,
+ "params": 9494923,
+ "train_minutes": 3.859987322489421,
+ "eval": {
+  "val": {
+   "loop_err": 0.5311617732048035,
+   "field_corr": 0.0023457618193060627,
+   "relL2_mean": 1.0004093647003174,
+   "coercive_exact": 0.0,
+   "rel_final": 1.0,
+   "corr_final": 0.022992285527288915,
+   "rel_t1": 1.2414453625679016,
+   "loop_err_median": 0.5465830564498901,
+   "field_corr_median": 0.0028135212050983682,
+   "relL2_mean_median": 1.000149667263031,
+   "coercive_exact_median": 0.0,
+   "rel_final_median": 1.0,
+   "corr_final_median": 0.021810553036630154,
+   "rel_t1_median": 1.1211788654327393,
+   "n": 10
+  }
+ },
+ "eval_minutes": 0.6576240062713623
+}

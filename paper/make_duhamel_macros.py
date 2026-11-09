@@ -83,11 +83,11 @@ for lab, tag in [("Duhamel-UNO (ours)", "Du"), ("F-FNO + recipe", "Ffno"), ("UNO
     r = spd["models"][lab]
     out.append(f"\\newcommand{{\\sp{tag}Params}}{{{r['params'] / 1e6:.1f}}}\n")
     out.append(f"\\newcommand{{\\sp{tag}Bone}}{{{r['s_per_traj_b1']:.2f}}}\n")
-    out.append(f"\\newcommand{{\\sp{tag}Bsixteen}}{{{r['s_per_traj_b16']:.2f}}}\n")
+    out.append(f"\\newcommand{{\\sp{tag}Bsixteen}}{{{r['s_per_traj_b16']:.3f}}}\n")   # 3 decimals: 196 s / 0.108 s = 1814x reproduces the printed speed-up
     out.append(f"\\newcommand{{\\sp{tag}SpeedBone}}{{{r['speedup_b1']:.0f}}}\n")
     out.append(f"\\newcommand{{\\sp{tag}SpeedBsixteen}}{{{r['speedup_b16']:.0f}}}\n")
 
-# ---- multi-material: the npj_v2 macro files, verbatim ----------------------------------------
+# ---- multi-material: the macro files written by paper/tools, verbatim ----------------------------------------
 for f in ["numbers.tex", "numbers_adv.tex", "numbers_old.tex", "numbers_units.tex", "numbers_pbench.tex"]:
     p = os.path.join(NPJ, f)
     out.append(f"% ---- copied from paper/tools/{f}\n")

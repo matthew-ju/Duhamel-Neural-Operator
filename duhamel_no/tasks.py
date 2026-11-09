@@ -179,12 +179,12 @@ class TDGLTask:
 class HystTask:
     """FerroX voltage-sweep hysteresis loops (eps_de = 100). train = 100 loops (50 materials x 2 V_max), tests =
     new noise (100), held-out materials (30), closed loops (10, extra leg). cond per step = material + V(t), V(t+1),
-    dV, log eps (same extras as train_hyst.extra_vec)."""
+    dV, log eps (same extras as hyst_data.extra_vec)."""
 
     def __init__(self):
         import glob
-        os.environ.setdefault("HYST_DIR", "ferrox_hyst2")
-        import train_hyst as th
+        os.environ.setdefault("HYST_DIR", "ferrox_hyst_closed2")
+        import hyst_data as th
         self.th = th
         paths = sorted(glob.glob(os.path.join(os.environ["SCRATCH"], os.environ["HYST_DIR"], "h_*.npz")))
         sp = json.load(open(th.SPLIT2))
@@ -267,7 +267,7 @@ class HystTask:
         L = self.th.load_loop(path); L["name"] = os.path.basename(path)[:-4]; return L
 
     def loop_metrics(self, pred_norm, L):
-        """pred_norm (T, C, H, W) in normalised units -> train_hyst.loop_metrics."""
+        """pred_norm (T, C, H, W) in normalised units -> hyst_data.loop_metrics."""
         pred = (pred_norm * self.scale).unsqueeze(1).cpu().numpy()        # (T,1,Z,H,W)
         r, mp, mt = self.th.loop_metrics(pred, L)
         return dict(loop_err=r["loop_err"], field_corr=float(np.mean(r["field_corr"])), relL2_mean=r["relL2_mean"],

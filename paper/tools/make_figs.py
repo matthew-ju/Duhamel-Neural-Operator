@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""paper_tmlr/make_figs.py -- every figure, table and number of the TMLR draft, regenerated from result files.
+"""paper/tools/make_figs.py -- shared tables, figures and numbers of the paper, regenerated from the result files.
 
 Sources (never hand-typed): results/final (benchmark finals, val-selected via duhamel_no/summarize2.load),
 results/phys (physics metrics, speed), results/res (resolution transfer), results/analysis/probe_chaos.json
@@ -861,7 +861,7 @@ def table_models():
     for t, tn in (("tdgl", "FerroX TDGL"), ("hyst", "hysteresis"), ("ac", "Allen--Cahn"), ("ch", "Cahn--Hilliard")):
         first = True
         for m in ["duhamel_uno", "duhamel_ou2", "ffno", "unet", "uno", "cnext", "cno", "tfno", "fno", "transolver", "poseidon", "acdm", "flowmatch", "refiner2"]:
-            ds = runs(t, m)
+            ds = runs_h(m) if t == "hyst" else runs(t, m)   # hysteresis: the closed-loop runs that table_hyst reports
             if not ds:
                 continue
             p = ds[0].get("params"); tm = mean_std([d.get("train_minutes") for d in ds])[0]
@@ -879,9 +879,9 @@ def table_ablation():
     L = [r"\begin{tabular}{lccc}", r"\toprule",
          r"FerroX TDGL (same 9.5M-parameter UNO backbone) & corr@400 (D1) & rel.\,L2@400 (D1) & rel.\,L2, frame 1 \\", r"\midrule"]
     for m, lab in (("uno", "UNO + recipe (no Duhamel step)"), ("duhamel_uno", r"+ Duhamel step, measured operator (\DU{})"),
-                   ("duhamel_uno_rou2", r"\DU{} with an $O(u^2)$ remainder instead of UNO"),
+                   ("duhamel_uno_rou2", r"\DU{} with an $O(v^2)$ remainder instead of UNO"),
                    ("duhamel_uno_poly", "+ Duhamel step, learned conditioned symbol"), ("duhamel_uno_k0", r"\DU{}, uniform mode kept instead of damped"),
-                   ("duhamel", r"Duhamel, learned generator + small $O(u^2)$ network")):
+                   ("duhamel", r"Duhamel, learned generator + small $O(v^2)$ network")):
         if not runs("tdgl", m):
             continue
         c, r, t1 = metric("tdgl", m, "D1_heldout", "corr_final"), metric("tdgl", m, "D1_heldout", "rel_final"), metric("tdgl", m, "D1_heldout", "rel_t1")

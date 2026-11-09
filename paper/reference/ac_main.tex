@@ -1,0 +1,17 @@
+\begin{tabular}{lccccc}
+\toprule
+ & \multicolumn{3}{c}{trained grid ($64^2$)} & \multicolumn{2}{c}{zero-shot grid (in range)} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-6}
+model & in range & new units & new wall widths & $32^2$ & $128^2$ \\
+\midrule
+\DU{} (ours) & \textbf{0.012} & \textbf{0.010} & \textbf{0.075} & 0.124 & \textbf{0.010} \\
+\midrule
+F-FNO & \underline{0.043} & \underline{0.042} & 0.416 & \textbf{0.049} & \underline{0.086} \\
+CNextU-Net & 0.057 & 0.051 & 1.023 & 0.879 & 0.909 \\
+U-Net & 0.088 & 0.066 & 0.378 & 0.857 & 0.854 \\
+CNO & 0.097 & 0.090 & 0.667 & 0.884 & 0.859 \\
+UNO & 0.092 & 0.090 & 0.920 & 0.717 & 0.194 \\
+TFNO & 0.120 & 0.102 & \underline{0.265} & \underline{0.094} & 0.271 \\
+FNO & 0.150 & 0.148 & 0.443 & 0.115 & 0.276 \\
+\bottomrule
+\end{tabular}

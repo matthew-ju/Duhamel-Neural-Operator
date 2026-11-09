@@ -15,3 +15,11 @@ paper/tools/numbers.tex
 paper/tools/numbers_units.tex
 paper/tools/tables/
 paper/tools/figures/
+results/phys/*_examples.npz
+paper/figures/tmlr/setup_assets/
+paper/figures/tmlr/*.pdf
+!paper/figures/tmlr/setup_tikz.tex
+paper/figures/tmlr/*.aux
+paper/figures/tmlr/*.log
+paper/figures/appendix/
+*.aux

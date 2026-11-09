@@ -1,0 +1,43 @@
+{
+ "task": "hyst",
+ "model": "uno",
+ "seed": 0,
+ "mode": "tune",
+ "steps": 0,
+ "bs": 16,
+ "k": 4,
+ "lr": 0.001,
+ "loss": "rel",
+ "wrap": false,
+ "scale": "global",
+ "no_aug": false,
+ "bf16": false,
+ "smoke": false,
+ "fp32": false,
+ "tag": "hyst_uno_lr0.001_rel_s0",
+ "cfg": "lr0.001_rel",
+ "bound": 8.818359375,
+ "scale_field": 0.7077219486236572,
+ "params": 9492938,
+ "train_minutes": 3.7276815374692283,
+ "eval": {
+  "val": {
+   "loop_err": 2.332196068763733,
+   "field_corr": 0.15744987627957016,
+   "relL2_mean": 3.5136568784713744,
+   "coercive_exact": 0.0,
+   "rel_final": 4.050955295562744,
+   "corr_final": 0.7550573080778122,
+   "rel_t1": 9.459983825683594,
+   "loop_err_median": 2.444880485534668,
+   "field_corr_median": 0.1615192424505949,
+   "relL2_mean_median": 3.4529916048049927,
+   "coercive_exact_median": 0.0,
+   "rel_final_median": 4.070486068725586,
+   "corr_final_median": 0.7871600389480591,
+   "rel_t1_median": 8.375027656555176,
+   "n": 10
+  }
+ },
+ "eval_minutes": 0.6292062322298686
+}

@@ -1,0 +1,12 @@
+\begin{tabular}{lccc}
+\toprule
+variant & D1 corr. & D1 error & frame-1 error \\
+\midrule
+(a) UNO alone, no Duhamel step & 0.962{\scriptsize$\pm$0.003} & 0.219{\scriptsize$\pm$0.012} & 0.315{\scriptsize$\pm$0.005} \\
+(b) \DU{} (measured Fourier SSM) & 0.982{\scriptsize$\pm$0.001} & 0.129{\scriptsize$\pm$0.003} & 0.082{\scriptsize$\pm$0.000} \\
+(c) \DU{}, small $O(v^2)$ network instead of UNO & 0.934{\scriptsize$\pm$0.013} & 0.287{\scriptsize$\pm$0.042} & 0.085{\scriptsize$\pm$0.000} \\
+(d) \DU{}, learned symbol instead of measured & 0.950{\scriptsize$\pm$0.001} & 0.256{\scriptsize$\pm$0.003} & 0.399{\scriptsize$\pm$0.026} \\
+(e) \DU{}, uniform mode kept instead of damped & 0.980 & 0.133 & 0.093 \\
+(f) learned symbol and small $O(v^2)$ network & 0.812{\scriptsize$\pm$0.002} & 0.578{\scriptsize$\pm$0.003} & 0.219{\scriptsize$\pm$0.001} \\
+\bottomrule
+\end{tabular}

@@ -1,0 +1,144 @@
+% Figure 1 (problem setup). Data assets in setup_assets/ come from scripts/make_setup_fig.py (one real FerroX trajectory).
+% Compile: pdflatex setup_tikz.tex  (the script does this and copies the result to setup.pdf)
+\documentclass[tikz,border=2pt]{standalone}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta,calc}
+
+\definecolor{up}{HTML}{B2182B}
+\definecolor{down}{HTML}{2166AC}
+\definecolor{metal}{HTML}{8C8C8C}
+\definecolor{diel}{HTML}{DCE3EA}
+\definecolor{stageA}{HTML}{F4F4F4}
+\definecolor{stageB}{HTML}{E6E6E6}
+\definecolor{stageC}{HTML}{CFCFCF}
+
+\newcommand{\asset}[1]{setup_assets/#1}
+\newcommand{\Ps}{P_{\mathrm{S}}}
+
+% a slab of the device: bottom z0, height h, front/side/top fill colour
+\newcommand{\slab}[4][black!60]{%
+  \fill[#4] (0,#2) rectangle (\Lx,#2+#3);
+  \fill[#4!85!black] (\Lx,#2) -- ++(\Dx,\Dy) -- ++(0,#3) -- (\Lx,#2+#3) -- cycle;
+  \fill[#4!92!white] (0,#2+#3) -- (\Lx,#2+#3) -- ++(\Dx,\Dy) -- ++(-\Lx,0) -- cycle;
+  \draw[#1,line width=0.35pt,line join=round] (0,#2) rectangle (\Lx,#2+#3)
+     (\Lx,#2) -- ++(\Dx,\Dy) -- ++(0,#3) -- ++(-\Lx,0) -- (0,#2+#3) (\Lx,#2+#3) -- ++(\Dx,\Dy);
+}
+
+\begin{document}
+\begin{tikzpicture}[font=\footnotesize, >={Stealth[length=4pt]}]
+
+%======================================================================== (a) the device
+\def\Lx{4.0}\def\Dx{1.7}\def\Dy{1.0}
+\def\zDE{0.18}\def\zFE{0.86}\def\zTop{1.71}\def\hEl{0.18}\def\zEl{3.0}
+\begin{scope}
+  \slab{0}{\hEl}{metal}
+  \slab{\zDE}{0.68}{diel}
+  % ferroelectric film: the three visible faces are the real final state
+  \begin{scope}[cm={\Lx,0,0,0.85,(0,\zFE)}]
+    \node[inner sep=0,anchor=south west,transform shape] at (0,0) {\includegraphics[width=1cm,height=1cm]{\asset{front.png}}};
+  \end{scope}
+  \begin{scope}[cm={\Dx,\Dy,0,0.85,(\Lx,\zFE)}]
+    \node[inner sep=0,anchor=south west,transform shape] at (0,0) {\includegraphics[width=1cm,height=1cm]{\asset{side.png}}};
+  \end{scope}
+  \begin{scope}[cm={\Lx,0,\Dx,\Dy,(0,\zTop)}]
+    \node[inner sep=0,anchor=south west,transform shape] at (0,0) {\includegraphics[width=1cm,height=1cm]{\asset{top.png}}};
+  \end{scope}
+  \draw[black!60,line width=0.35pt,line join=round] (0,\zFE) rectangle (\Lx,\zTop)
+     (\Lx,\zFE) -- ++(\Dx,\Dy) -- ++(0,0.85) -- ++(-\Lx,0) -- (0,\zTop) (\Lx,\zTop) -- ++(\Dx,\Dy);
+  % top electrode, lifted off (exploded view)
+  \foreach \p in {(0,\zTop),(\Lx,\zTop),(\Lx+\Dx,\zTop+\Dy)}
+    \draw[black!35,densely dashed,line width=0.3pt] \p -- ++(0,\zEl-\zTop);
+  \slab{\zEl}{\hEl}{metal}
+  % labels
+  \def\lx{\Lx+\Dx+0.25}
+  \draw[black!50,line width=0.3pt] (\Lx+\Dx,\zEl+\Dy+0.09) -- (\lx,\zEl+\Dy+0.09) node[right,black] {metal};
+  \draw[black!50,line width=0.3pt] (\Lx+0.5*\Dx,\zFE+0.43+0.5*\Dy) -- (\lx,\zFE+0.43+0.5*\Dy) node[right,black] {ferroelectric};
+  \draw[black!50,line width=0.3pt] (\Lx+0.5*\Dx,\zDE+0.34+0.5*\Dy) -- (\lx,\zDE+0.34+0.5*\Dy) node[right,black] {dielectric};
+  \draw[black!50,line width=0.3pt] (\Lx+0.5*\Dx,0.09+0.5*\Dy) -- (\lx,0.09+0.5*\Dy) node[right,black] {metal};
+  % axes triad
+  \begin{scope}[shift={(-0.9,-0.1)},->,line width=0.4pt]
+    \draw (0,0) -- (0.5,0) node[right,inner sep=1pt] {$x$};
+    \draw (0,0) -- (0.4,0.235) node[above right,inner sep=0.5pt] {$y$};
+    \draw (0,0) -- (0,0.5) node[above,inner sep=1pt] {$z$};
+  \end{scope}
+  % colour bar for P_z
+  \node[inner sep=0,anchor=south west] (cb) at (8.35,0.55) {\includegraphics[width=0.16cm,height=1.6cm]{\asset{cbar.png}}};
+  \draw[black!60,line width=0.3pt] (cb.south west) rectangle (cb.north east);
+  \node[right,inner sep=2pt] at (cb.north east) {$+\Ps$};
+  \node[right,inner sep=2pt] at (cb.south east) {$-\Ps$};
+  \node[above,inner sep=3pt] at (cb.north) {$P_z$};
+  \node[anchor=north west,font=\small] at (-0.6,4.55) {(a)};
+\end{scope}
+
+%======================================================================== (b) Landau double well
+\begin{axis}[at={(10.55cm,0.15cm)}, anchor=south west, scale only axis, width=4.9cm, height=3.3cm,
+  axis lines=left, xmin=-1.45, xmax=1.45, ymin=-1.3, ymax=1.1,
+  xtick={-1,0,1}, xticklabels={$-P_0$,$0$,$P_0$}, ytick=\empty,
+  xlabel={$P_z$}, ylabel={$f(P_z)$}, xlabel style={at={(axis description cs:1,0)},anchor=north east,inner sep=1pt},
+  ylabel style={at={(axis description cs:0,1)},anchor=south,rotate=-90,inner sep=2pt},
+  tick label style={font=\footnotesize}, axis line style={black!70,-}, clip=false]
+  \addplot[black, line width=0.9pt, smooth] table[x=p,y=f] {\asset{well.dat}};
+  \draw[black!45,dashed,line width=0.4pt,->] (axis cs:-0.06,-0.03) to[bend right=25] (axis cs:-0.78,-0.78);
+  \draw[black!45,dashed,line width=0.4pt,->] (axis cs:0.06,-0.03) to[bend left=25] (axis cs:0.78,-0.78);
+  \fill[down] (axis cs:-1,-1) circle (2.1pt);
+  \fill[up] (axis cs:1,-1) circle (2.1pt);
+  \filldraw[fill=white,draw=black,line width=0.5pt] (axis cs:0,0) circle (2.1pt);
+  \draw[down,line width=1.3pt,-{Stealth[length=4.5pt]}] (axis cs:-1,-0.22) -- (axis cs:-1,-0.68);
+  \draw[up,line width=1.3pt,-{Stealth[length=4.5pt]}] (axis cs:1,-0.68) -- (axis cs:1,-0.22);
+\end{axis}
+\node[anchor=north west,font=\small] at (9.75,4.55) {(b)};
+
+%======================================================================== (c) from noise to domains
+\node[anchor=north west,font=\small] at (-0.6,-0.45) {(c)};
+\def\ys{-3.15}\def\ws{2.05}
+\foreach \n/\xc in {000/2.0, 030/5.0, 060/8.0, 080/11.0, 400/14.45} {
+  \node[inner sep=0,anchor=south,draw=black!60,line width=0.3pt] (s\n) at (\xc,\ys)
+    {\includegraphics[width=\ws cm,height=\ws cm]{\asset{snap_\n.png}}};
+}
+\foreach \n/\lab in {000/0, 030/30, 060/60, 080/80, 400/400} {
+  \draw[black!60,line width=0.3pt] (s\n.south west) rectangle (s\n.north east);
+  \node[above,inner sep=2pt] at (s\n.north) {$n=\lab$};
+}
+
+\begin{axis}[name=main, at={(0.6cm,-6.35cm)}, anchor=south west, scale only axis, width=11.75cm, height=2.55cm,
+  ymode=log, xmin=-2, xmax=131, ymin=1.5e-4, ymax=4,
+  axis x line*=bottom, axis y line*=left, axis line style={black!70,-},
+  xtick={0,20,...,120}, ytick={1e-3,1e-2,1e-1,1}, yticklabels={$10^{-3}$,$10^{-2}$,$10^{-1}$,$1$},
+  tick label style={font=\footnotesize}, xlabel={frame $n$}, ylabel={rms $P_z/\Ps$},
+  xlabel style={inner sep=1pt}, ylabel style={inner sep=1pt}]
+  \fill[stageA] (axis cs:0,1.5e-4) rectangle (axis cs:60,4);
+  \fill[stageB] (axis cs:60,1.5e-4) rectangle (axis cs:100,4);
+  \fill[stageC] (axis cs:0,1.5e-4) rectangle (axis cs:3,4);
+  \draw[black!70,line width=0.4pt,->] (axis cs:9,3.1e-4) -- (axis cs:3.3,3.1e-4);
+  \node[anchor=west,inner sep=1pt] at (axis cs:9,3.1e-4) {noise decay};
+  \fill[stageA] (axis cs:100,1.5e-4) rectangle (axis cs:131,4);
+  \node at (axis cs:30,1.9) {incubation};
+  \node at (axis cs:80,1.9) {nucleation};
+  \node at (axis cs:115.5,1.9) {saturation};
+  \addplot[black, line width=0.9pt, restrict x to domain=-2:131] table[x=n,y=rms_over_Ps] {\asset{rms.dat}};
+  \coordinate (p000) at (axis cs:0,7.3347e-03);
+  \coordinate (p030) at (axis cs:30,5.4167e-03);
+  \coordinate (p060) at (axis cs:60,9.3725e-02);
+  \coordinate (p080) at (axis cs:80,4.0094e-01);
+  \coordinate (brkL) at (axis cs:131,1.5e-4);
+\end{axis}
+\begin{axis}[at={(12.75cm,-6.35cm)}, anchor=south west, scale only axis, width=2.6cm, height=2.55cm,
+  ymode=log, xmin=368, xmax=402, ymin=1.5e-4, ymax=4,
+  axis x line*=bottom, axis y line=none, axis line style={black!70,-},
+  xtick={380,400}, tick label style={font=\footnotesize}]
+  \fill[stageA] (axis cs:368,1.5e-4) rectangle (axis cs:402,4);
+  \addplot[black, line width=0.9pt, restrict x to domain=368:402] table[x=n,y=rms_over_Ps] {\asset{rms.dat}};
+  \coordinate (p400) at (axis cs:400,5.9930e-01);
+  \coordinate (brkR) at (axis cs:368,1.5e-4);
+\end{axis}
+\foreach \c in {brkL,brkR} \draw[black!70,line width=0.5pt] ($(\c)+(-0.05,-0.09)$) -- ++(0.1,0.18);
+\foreach \n in {000,030,060,080,400} {
+  \draw[up!70,line width=0.4pt] (s\n.south) -- (p\n);
+  \fill[up] (p\n) circle (1.6pt);
+}
+\end{tikzpicture}
+\end{document}

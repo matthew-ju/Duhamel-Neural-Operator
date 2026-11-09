@@ -28,7 +28,7 @@ import shutil
 import sys
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(_HERE, "data", "ST_Ferro"))
+sys.path.insert(0, _HERE)                                  # amrex_read.py (FerroX plotfile reader)
 
 
 def gen_inputs(args):

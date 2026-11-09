@@ -1,0 +1,22 @@
+\begin{tabular}{llcccccc}
+\toprule
+ & & & \multicolumn{2}{c}{D1 held-out (256)} & \multicolumn{2}{c}{D2 out-of-range (300)} & frame 1 \\
+\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(lr){8-8}
+model & family & seeds & corr@400 & rel.\,L2@400 & corr@400 & rel.\,L2@400 & rel.\,L2 \\
+\midrule
+Duhamel-NO (ours) & ours & 3 & \textbf{0.982{\scriptsize$\pm$0.001}} & \textbf{0.129{\scriptsize$\pm$0.003}} & \textbf{0.978{\scriptsize$\pm$0.001}} & \textbf{0.145{\scriptsize$\pm$0.004}} & \textbf{0.082{\scriptsize$\pm$0.000}} \\
+\midrule
+F-FNO & spectral NO & 3 & 0.974{\scriptsize$\pm$0.001} & 0.167{\scriptsize$\pm$0.003} & 0.968{\scriptsize$\pm$0.000} & 0.195{\scriptsize$\pm$0.004} & 0.215{\scriptsize$\pm$0.001} \\
+U-Net & U-Net & 1 & 0.966 & 0.207 & 0.954 & 0.242 & 0.313 \\
+UNO & spectral NO & 3 & 0.962{\scriptsize$\pm$0.003} & 0.219{\scriptsize$\pm$0.012} & 0.959{\scriptsize$\pm$0.002} & 0.238{\scriptsize$\pm$0.008} & 0.315{\scriptsize$\pm$0.005} \\
+CNextU-Net & U-Net & 3 & 0.959{\scriptsize$\pm$0.000} & 0.229{\scriptsize$\pm$0.002} & 0.949{\scriptsize$\pm$0.002} & 0.261{\scriptsize$\pm$0.010} & 0.347{\scriptsize$\pm$0.018} \\
+CNO & conv. NO & 3 & 0.951{\scriptsize$\pm$0.004} & 0.256{\scriptsize$\pm$0.011} & 0.937{\scriptsize$\pm$0.004} & 0.292{\scriptsize$\pm$0.005} & 0.451{\scriptsize$\pm$0.003} \\
+TFNO & spectral NO & 3 & 0.949{\scriptsize$\pm$0.005} & 0.272{\scriptsize$\pm$0.017} & 0.952{\scriptsize$\pm$0.003} & 0.265{\scriptsize$\pm$0.012} & 0.564{\scriptsize$\pm$0.004} \\
+FNO & spectral NO & 3 & 0.947{\scriptsize$\pm$0.004} & 0.270{\scriptsize$\pm$0.015} & 0.947{\scriptsize$\pm$0.003} & 0.268{\scriptsize$\pm$0.012} & 0.568{\scriptsize$\pm$0.003} \\
+Poseidon-T & foundation & 1 & 0.553 & 2.917 & 0.414 & 2.570 & 4.342 \\
+U-Net + ACDM diffusion & diffusion & 1 & 0.206 & 1.293 & 0.092 & 2.854 & 5.209 \\
+U-Net + flow matching & flow matching & 1 & 0.169 & 1.330 & 0.094 & 1.895 & 5.210 \\
+U-Net + PDE-Refiner & diffusion & 1 & 0.053 & 3.578 & 0.033 & 2.158 & 5.351 \\
+Transolver & transformer & 1 & 0.003 & 1.329 & 0.008 & 1.313 & 0.757 \\
+\bottomrule
+\end{tabular}

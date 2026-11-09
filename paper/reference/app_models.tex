@@ -1,0 +1,28 @@
+\begin{tabular}{llrrrll}
+\toprule
+task & model & params (M) & seeds & train (min) & lr & configuration \\
+\midrule
+FerroX TDGL & Duhamel-NO (ours) & 9.49 & 3 & 39 & 0.0003 & our setup \\
+ & F-FNO & 1.19 & 3 & 42 & 0.001 & our setup \\
+ & U-Net & 10.95 & 1 & 76 & 0.0003 & our setup \\
+ & UNO & 9.49 & 3 & 27 & 0.001 & our setup \\
+ & CNextU-Net & 9.93 & 3 & 59 & 0.0003 & our setup \\
+ & CNO & 5.50 & 3 & 93 & 0.001 & our setup \\
+ & TFNO & 1.03 & 3 & 27 & 0.001 & our setup \\
+ & FNO & 2.42 & 3 & 27 & 0.001 & our setup \\
+ & Transolver & 2.19 & 1 & 161 & 0.001 & our setup \\
+ & Poseidon-T & 20.79 & 1 & 129 & 0.0001 & rel. L2 \\
+ & U-Net + ACDM diffusion & 10.94 & 1 & 16 & 0.001 & global noise scale \\
+ & U-Net + flow matching & 10.94 & 1 & 23 & 0.001 & global noise scale \\
+ & U-Net + PDE-Refiner & 10.94 & 1 & 25 & 0.001 & global noise scale \\
+\midrule
+hysteresis & Duhamel-NO (ours) & 9.49 & 3 & 81 & 0.001 & our setup \\
+ & F-FNO & 1.19 & 1 & 53 & 0.001 & our setup \\
+ & U-Net & 10.94 & 1 & 52 & 0.0003 & rel. L2 \\
+ & UNO & 9.49 & 1 & 22 & 0.001 & our setup \\
+ & CNextU-Net & 9.93 & 3 & 43 & 0.0003 & our setup \\
+ & CNO & 5.50 & 3 & 74 & 0.0003 & our setup \\
+ & TFNO & 1.03 & 1 & 24 & 0.001 & MSE \\
+ & FNO & 2.42 & 1 & 24 & 0.001 & our setup \\
+\bottomrule
+\end{tabular}
