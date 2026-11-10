@@ -8,30 +8,30 @@ mode by its exact linear factor, and a **U-shaped neural operator** learns the n
 ## Quick start: reproduce the paper's numbers (5 minutes, no GPU, no download)
 
 ```bash
-git clone https://github.com/matthew-ju/Duhamel-Neural-Operator.git
+git clone https://anonymous.4open.science/r/Duhamel-Neural-Operator.git
 cd Duhamel-Neural-Operator
 pip install -r requirements.txt
 bash scripts/make_tables.sh
 ```
 
 This rebuilds every number (77) and every table (10) of the paper, main text and appendix, plus the figures drawn from
-results, from the included result files, and compares them with the published paper. The last line should be
+results, from the included result files, and compares them with the submitted paper. The last line should be
 `ALL MATCH`.
 
 ## Data and trained models
 
 | what | where |
 |---|---|
-| D1, D2 and hysteresis data, with the paper's splits | [huggingface.co/datasets/matthewju/ferroelectric-tdgl-bench](https://huggingface.co/datasets/matthewju/ferroelectric-tdgl-bench) |
-| every trained model of the paper (109 checkpoints) and the measured Fourier SSMs | [huggingface.co/matthewju/duhamel-neural-operator](https://huggingface.co/matthewju/duhamel-neural-operator) |
+| D1, D2 and hysteresis data, with the paper's splits | [anonymous Hugging Face dataset](https://huggingface.co/datasets/anonymous-duhamel/ferroelectric-tdgl-bench) |
+| every trained model of the paper (109 checkpoints) and the measured Fourier SSMs | [anonymous Hugging Face model repo](https://huggingface.co/anonymous-duhamel/duhamel-neural-operator) |
 
 ## Evaluate the trained models
 
 ```bash
 export SCRATCH=/path/to/workdir                 # data, checkpoints and caches go here (~200 GB)
 pip install -U huggingface_hub                  # provides the hf command
-hf download matthewju/duhamel-neural-operator --local-dir $SCRATCH
-hf download matthewju/ferroelectric-tdgl-bench --repo-type dataset --local-dir ./ferro_data
+hf download anonymous-duhamel/duhamel-neural-operator --local-dir $SCRATCH
+hf download anonymous-duhamel/ferroelectric-tdgl-bench --repo-type dataset --local-dir ./ferro_data
 bash scripts/link_hf_data.sh ./ferro_data
 python duhamel_no/build_train_cache.py          # training-set cache the data loader needs
 python duhamel_no/run.py --mode final --task tdgl --model duhamel_uno --seed 0 --lr 0.0003 --wrap --eval_only
@@ -77,23 +77,7 @@ docs/              REPRODUCE.md: the detailed step-by-step guide
 
 ## Citation
 
-```bibtex
-@misc{ju2026duhamel,
-  title     = {Duhamel Neural Operator for Learning Phase-Field Dynamics},
-  author    = {Ju, Matthew and Tang, Yingheng and Wang, Kang'an and Sha, Haozhi},
-  year      = {2026},
-  url       = {https://github.com/matthew-ju/Duhamel-Neural-Operator}
-}
-
-@misc{ju2026ferrobench,
-  title     = {Ferroelectric {TDGL} Phase-Field Benchmark},
-  author    = {Ju, Matthew and Tang, Yingheng and Wang, Kang'an and Sha, Haozhi},
-  year      = {2026},
-  publisher = {Hugging Face},
-  doi       = {10.57967/hf/11169},
-  url       = {https://huggingface.co/datasets/matthewju/ferroelectric-tdgl-bench}
-}
-```
+Citation information is withheld for double-blind review and will be added upon acceptance.
 
 ## License
 
