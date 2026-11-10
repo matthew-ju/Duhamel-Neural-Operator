@@ -8,7 +8,9 @@ mode by its exact linear factor, and a **U-shaped neural operator** learns the n
 ## Quick start: reproduce the paper's numbers (5 minutes, no GPU, no download)
 
 ```bash
-git clone https://anonymous.4open.science/r/Duhamel-Neural-Operator.git
+# download the zip from https://anonymous.4open.science/r/Duhamel-Neural-Operator-8DF4/
+# (click "Download Repository"), then:
+unzip Duhamel-Neural-Operator-8DF4.zip -d Duhamel-Neural-Operator
 cd Duhamel-Neural-Operator
 pip install -r requirements.txt
 bash scripts/make_tables.sh
@@ -22,23 +24,19 @@ results, from the included result files, and compares them with the submitted pa
 
 | what | where |
 |---|---|
-| D1, D2 and hysteresis data, with the paper's splits | [anonymous Hugging Face dataset](https://huggingface.co/datasets/anonymous-duhamel/ferroelectric-tdgl-bench) |
-| every trained model of the paper (109 checkpoints) and the measured Fourier SSMs | [anonymous Hugging Face model repo](https://huggingface.co/anonymous-duhamel/duhamel-neural-operator) |
+| D1, D2 and hysteresis data, with the paper's splits | [anonymous link](https://anonymous-hf.com/a/58mhxpc51v6u/) (dataset) |
+| every trained model of the paper (109 checkpoints) and the measured Fourier SSMs | [anonymous link](https://anonymous-hf.com/a/58mhxpc51v6u/) (models) |
 
 ## Evaluate the trained models
 
+Download the checkpoints into `$SCRATCH` and the dataset into `./ferro_data` from the links above, then:
+
 ```bash
 export SCRATCH=/path/to/workdir                 # data, checkpoints and caches go here (~200 GB)
-pip install -U huggingface_hub                  # provides the hf command
-hf download anonymous-duhamel/duhamel-neural-operator --local-dir $SCRATCH
-hf download anonymous-duhamel/ferroelectric-tdgl-bench --repo-type dataset --local-dir ./ferro_data
 bash scripts/link_hf_data.sh ./ferro_data
 python duhamel_no/build_train_cache.py          # training-set cache the data loader needs
 python duhamel_no/run.py --mode final --task tdgl --model duhamel_uno --seed 0 --lr 0.0003 --wrap --eval_only
 ```
-
-The last line re-scores Duhamel-NO on D1 and D2 and rewrites `results/final/tdgl_duhamel_uno_lr0.0003_recipe_s0.json`
-with the same numbers. `scripts/evaluate_all.sh` runs every evaluation of the paper.
 
 ## Train
 
