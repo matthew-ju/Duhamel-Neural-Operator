@@ -1,4 +1,4 @@
-# Python 3.12; CUDA 12.9 build of PyTorch (NERSC: module load pytorch/2.11.0)
+# Python 3.12; PyTorch 2.11 (tested with the CUDA 12.9 and CUDA 13.0 builds)
 torch==2.11.0
 numpy==2.4.3
 scipy==1.17.1

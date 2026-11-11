@@ -1,6 +1,7 @@
 """ferro_bench.py -- load the ferroelectric TDGL benchmark and score predictions the way the paper does.
 
     import ferro_bench as fb
+    fb.ROOT = "/path/to/ferro_data"                  # or set FERRO_BENCH_ROOT; default: this file's folder
     meta = fb.metadata("d1")                         # list of dicts, one per trajectory
     P = fb.load("d1", meta[0])                       # (401, 10, 64, 64) float32, C/m^2 (memory-mapped)
     fb.pattern_corr(pred[400], P[400]); fb.rel_l2(pred[400], P[400])
@@ -18,8 +19,9 @@ ROOT = os.environ.get("FERRO_BENCH_ROOT", os.path.dirname(os.path.abspath(__file
 _NUM = {"seed", "nsteps", "plot_int", "paper_eval"}
 
 
-def metadata(dataset, split=None, root=ROOT):
+def metadata(dataset, split=None, root=None):
     """Rows of <dataset>/metadata.csv (dataset: 'd1', 'd2' or 'hysteresis'), optionally filtered by split."""
+    root = ROOT if root is None else root  # read at call time, so `fb.ROOT = ...` after import takes effect
     with open(os.path.join(root, dataset, "metadata.csv")) as f:
         rows = list(csv.DictReader(f))
     for r in rows:
@@ -31,8 +33,9 @@ def metadata(dataset, split=None, root=ROOT):
     return [r for r in rows if split is None or r["split"] in ([split] if isinstance(split, str) else split)]
 
 
-def load(dataset, row, root=ROOT):
+def load(dataset, row, root=None):
     """D1/D2: Pz array (T, Z, H, W). Hysteresis: dict with P (T, Z, H, W), step (T,), V (T,) in volts."""
+    root = ROOT if root is None else root
     path = os.path.join(root, dataset, row["file"])
     if path.endswith(".npy"):
         return np.load(path, mmap_mode="r")

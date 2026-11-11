@@ -12,14 +12,14 @@
 ## Step 0. Install
 
 ```bash
-git clone https://github.com/matthew-ju/Duhamel-Neural-Operator.git && cd Duhamel-Neural-Operator
+# download the zip from https://anonymous.4open.science/r/Duhamel-Neural-Operator-8DF4/ ("Download Repository"), then:
+unzip Duhamel-Neural-Operator-8DF4.zip -d Duhamel-Neural-Operator && cd Duhamel-Neural-Operator
 conda create -n duhamel python=3.12 -y && conda activate duhamel
 pip install -r requirements.txt
 ```
 
 The paper used Python 3.12, PyTorch 2.11 (CUDA 12.9) and neuraloperator 2.0.0; `requirements.txt` pins every
-package. On NERSC Perlmutter, `module load pytorch/2.11.0` provides all of them. Figures 1 and 2 also need LaTeX with
-TikZ.
+package. Figures 1 and 2 also need LaTeX with TikZ.
 
 ## Step 1. Choose a working directory
 
@@ -72,14 +72,11 @@ The figures that show actual fields need the data and the trained models (steps 
 
 ## Step 3. Download the data and the trained models
 
-The data are on Hugging Face: <https://huggingface.co/datasets/matthewju/ferroelectric-tdgl-bench>
-(DOI [10.57967/hf/11169](https://doi.org/10.57967/hf/11169)). Download them and link them into `$SCRATCH`
-(the symlinks copy nothing):
+The data are on Hugging Face, behind an anonymous link for the review: <https://anonymous-hf.com/a/58mhxpc51v6u/>.
+Download the dataset into `./ferro_data` (it contains `d1/`, `d2/`, `hysteresis/` and `simulation/`; for the test sets
+only, `d1/metadata.csv` and `d2/` are enough), then link it into `$SCRATCH` (the symlinks copy nothing):
 
 ```bash
-pip install -U huggingface_hub   # provides the hf command
-hf download matthewju/ferroelectric-tdgl-bench --repo-type dataset --local-dir ./ferro_data
-#   only the test sets: add  --include "d1/metadata.csv" --include "d2/*"
 bash scripts/link_hf_data.sh ./ferro_data
 python duhamel_no/build_train_cache.py    # training-set cache from D1 (bit-identical to ours)
 ```
@@ -88,12 +85,8 @@ The released files hold only the 10 ferroelectric layers, as `(401, 10, 64, 64)`
 and the raw `(64, 64, 18, 401)` FerroX extracts. Each trajectory's material (α, β, γ), time step and seed are in
 `data_generation/jobs_D1.txt` / `jobs_D2.txt`, and in the `metadata.csv` of each dataset.
 
-The trained models and the measured Fourier SSMs are at <https://huggingface.co/matthewju/duhamel-neural-operator>.
-The repository mirrors `$SCRATCH`, so this puts every file in place:
-
-```bash
-hf download matthewju/duhamel-neural-operator --local-dir $SCRATCH
-```
+The trained models and the measured Fourier SSMs are at the same anonymous link. Their folders mirror `$SCRATCH`:
+download `bench_ckpt/` and `bench_cache/` into `$SCRATCH`, which puts every file in place.
 
 The Allen–Cahn data are not downloaded; generate them (minutes, deterministic):
 
