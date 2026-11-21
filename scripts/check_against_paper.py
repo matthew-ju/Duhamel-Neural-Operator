@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """scripts/check_against_paper.py -- compare what you regenerated with what the paper prints.
 
-Checks every number of paper/numbers_duhamel.tex that the paper uses (53 in the main text, 24 more in the appendix) and
-the ten tables the paper typesets, against the published copies in paper/reference/. Prints one line per mismatch and a
+Checks every number of reproduce/numbers_duhamel.tex that the paper uses (53 in the main text, 24 more in the appendix) and
+the ten tables the paper typesets, against the values printed in the paper (reproduce/expected/). Prints one line per mismatch and a
 summary. Exit code 0 = everything matches."""
 import os, re, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-P = os.path.join(ROOT, "paper")
+P = os.path.join(ROOT, "reproduce")
 MAIN = ["ablUnoRel", "ablUnoRelTone", "advDoneTone", "bankCorrTone", "capTone", "capTten", "capTthree", "capTtwo",
         "clTnucPhys", "clTnucRed", "deduA", "deffnoA", "duCorrDone", "duCorrDtwo", "duCorrTone", "duRelDone",
         "duRelDtwo", "duRelTone", "ffnoRelTone", "fnoCorrTone", "fnoCorrTthree", "fnoCorrTtwo", "fnoRelTone",
@@ -18,7 +18,7 @@ MAIN = ["ablUnoRel", "ablUnoRelTone", "advDoneTone", "bankCorrTone", "capTone", 
 APPENDIX = ["aRateCrit", "aSatCrit", "aSatE", "aSatSlope", "advHystTone", "baseACId", "baseACInv", "clN", "clSatPhys",
             "clSatRed", "deduB", "hystCno", "hystDuno", "hystGapDu", "nuFnoOffBu", "nuFnoOnBu", "nuUnoOffBu",
             "nuUnoOnBu", "ouACId", "ouACInv", "ratioACInv", "satLawDtwoMean", "satLawMax", "satLawMean"]
-TABLES = [("tdgl_compact.tex", "Table 1 (main results)"), ("physics_fig.tex", "Figure 5c (physical quantities)"),
+TABLES = [("tdgl_compact.tex", "Table 1 (main results)"), ("physics_fig.tex", "Figure 3c (physical quantities)"),
           ("tmlr_ablation.tex", "ablation table"), ("app_tdgl_main.tex", "appendix: TDGL, all metrics"),
           ("app_tdgl_subsets.tex", "appendix: TDGL subsets"), ("app_models.tex", "appendix: models"),
           ("app_recipe.tex", "appendix: training setup"), ("app_units_new.tex", "appendix: change of units"),
@@ -35,7 +35,7 @@ def lines(path):
 
 def main():
     bad = 0
-    new, ref = macros(os.path.join(P, "numbers_duhamel.tex")), macros(os.path.join(P, "reference", "numbers_duhamel.tex"))
+    new, ref = macros(os.path.join(P, "numbers_duhamel.tex")), macros(os.path.join(P, "expected", "numbers_duhamel.tex"))
     for lab, names in (("main text", MAIN), ("appendix", APPENDIX)):
         n = 0
         for m in names:
@@ -44,7 +44,7 @@ def main():
         print("numbers in the %s: %d / %d match" % (lab, len(names) - n, len(names)))
         bad += n
     for name, lab in TABLES:
-        a, b = lines(os.path.join(P, "tables", name)), lines(os.path.join(P, "reference", name))
+        a, b = lines(os.path.join(P, "tables", name)), lines(os.path.join(P, "expected", name))
         diff = [(x, y) for x, y in zip(a, b) if x != y] + ([("<length>", "<length>")] if len(a) != len(b) else [])
         for x, y in diff:
             print("MISMATCH  %s\n   regenerated: %s\n   paper:       %s" % (lab, x.strip(), y.strip()))

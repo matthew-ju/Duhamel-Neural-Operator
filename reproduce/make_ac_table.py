@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """make_ac_table.py -- tables/ac_main.tex: Allen-Cahn (our exponential-integrator data, bench task 'ac') relative L2 error at
-the final frame: in range / new units / new physics (validation-selected runs, mean over seeds, as paper/tools/tables/acch.tex)
+the final frame: in range / new units / new physics (validation-selected runs, mean over seeds, as reproduce/tools/tables/acch.tex)
 and zero-shot grids 32^2 / 128^2 for models trained on 64^2 (results/curves <- duhamel_no/curves.py: the same
 validation-selected runs, every seed)."""
 import glob, os, sys

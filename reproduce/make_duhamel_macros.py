@@ -6,7 +6,7 @@ Two sources, neither typed by hand:
       results/analysis/tdgl_tangent_eval.json   (Duhamel model, two training runs, 15 snapshots each)
       results/analysis/tdgl_frame_table.json    (same protocol: tangent, FSSM->FNO hand-off pipeline, FNO alone)
   * multi-material D1/D2 (alpha, beta, gamma and unseen noise): the macro files that
-    ../paper/tools/make_figs.py etc. write from the benchmark result files. They are copied verbatim.
+    reproduce/tools/make_figs.py etc. write from the benchmark result files. They are copied verbatim.
 Rerun after any of those change:  python make_duhamel_macros.py
 """
 import json
@@ -87,15 +87,15 @@ for lab, tag in [("Duhamel-UNO (ours)", "Du"), ("F-FNO + recipe", "Ffno"), ("UNO
     out.append(f"\\newcommand{{\\sp{tag}SpeedBone}}{{{r['speedup_b1']:.0f}}}\n")
     out.append(f"\\newcommand{{\\sp{tag}SpeedBsixteen}}{{{r['speedup_b16']:.0f}}}\n")
 
-# ---- multi-material: the macro files written by paper/tools, verbatim ----------------------------------------
+# ---- multi-material: the macro files written by reproduce/tools, verbatim ----------------------------------------
 for f in ["numbers.tex", "numbers_adv.tex", "numbers_old.tex", "numbers_units.tex", "numbers_pbench.tex"]:
     p = os.path.join(NPJ, f)
-    out.append(f"% ---- copied from paper/tools/{f}\n")
+    out.append(f"% ---- copied from reproduce/tools/{f}\n")
     out.append(open(p).read().rstrip() + "\n")
 
 open(os.path.join(HERE, "numbers_duhamel.tex"), "w").write("".join(out))
 
-# ---- multi-material tables and figures, copied verbatim from paper/tools -------------------
+# ---- multi-material tables and figures, copied verbatim from reproduce/tools -------------------
 import shutil
 os.makedirs(os.path.join(HERE, "tables"), exist_ok=True)
 os.makedirs(os.path.join(HERE, "figures", "06_duhamel"), exist_ok=True)

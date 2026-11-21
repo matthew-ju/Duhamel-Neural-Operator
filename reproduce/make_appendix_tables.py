@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""make_appendix_tables.py -- the remaining tables of the paper, all built from tables that paper/tools/make_figs.py,
+"""make_appendix_tables.py -- the remaining tables of the paper, all built from tables that reproduce/tools/make_figs.py,
 make_physics_table.py and make_ac_table.py wrote from the result files. Only labels and layout change here; every number
 is copied, none is typed by hand.
 
-  paper/tables/app_{tdgl_main,tdgl_subsets,models,recipe,hyst,units_new,ablation_tdgl}.tex   appendix tables
-  paper/tables/tmlr_ablation.tex      ablation table of the main text (rows (a)-(f))
-  paper/tables/physics_fig.tex        physical-quantity table inside Figure 5 (same numbers as app_physics_full.tex)
-  paper/tables/ac_main.tex            Allen-Cahn table, column "new physics" renamed "new wall widths"
-  paper/figures/appendix/*            appendix figures drawn by paper/tools (copied)"""
+  reproduce/tables/app_{tdgl_main,tdgl_subsets,models,recipe,hyst,units_new,ablation_tdgl}.tex   appendix tables
+  reproduce/tables/tmlr_ablation.tex      ablation table of the main text (rows (a)-(f))
+  reproduce/tables/physics_fig.tex        physical-quantity table inside Figure 5 (same numbers as app_physics_full.tex)
+  reproduce/tables/ac_main.tex            Allen-Cahn table, column "new physics" renamed "new wall widths"
+  reproduce/figures/appendix/*            appendix figures drawn by reproduce/tools (copied)"""
 import os, re, shutil
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -75,7 +75,7 @@ write("physics_fig.tex", t)
 p = os.path.join(TAB, "ac_main.tex")
 write("ac_main.tex", read(p).replace("& new physics &", "& new wall widths &"))
 
-# 6. appendix figures drawn by paper/tools
+# 6. appendix figures drawn by reproduce/tools
 dst = os.path.join(HERE, "figures", "appendix")
 os.makedirs(dst, exist_ok=True)
 n = 0

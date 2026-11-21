@@ -19,7 +19,7 @@ pip install -r requirements.txt
 ```
 
 The paper used Python 3.12, PyTorch 2.11 (CUDA 12.9) and neuraloperator 2.0.0; `requirements.txt` pins every
-package. Figures 1 and 2 also need LaTeX with TikZ.
+package. Step 2 alone needs only `pip install numpy scipy matplotlib`.
 
 ## Step 1. Choose a working directory
 
@@ -43,38 +43,40 @@ $SCRATCH/
   bench_ckpt/<run>.pt                              trained models
 ```
 
-## Step 2. Regenerate the numbers, tables and figures, and compare with the paper
+## Step 2. Regenerate the numbers and tables, and compare with the paper
 
 ```bash
 bash scripts/make_tables.sh
 ```
 
-This rebuilds, from the files in `results/`, every number the paper prints (`paper/numbers_duhamel.tex`: 53 in the
-main text, 24 in the appendix), the ten tables it typesets (`paper/tables/`) and the figures drawn from results
-(`paper/figures/`). Then `scripts/check_against_paper.py` compares the numbers and tables with the published copies in
-`paper/reference/`. With the included results the last line is `ALL MATCH`.
-
-The figures that show actual fields need the data and the trained models (steps 3 and 5):
-`bash scripts/make_figures_from_data.sh`.
+This rebuilds, from the files in `results/`, every number the paper prints (`reproduce/numbers_duhamel.tex`: 53 in
+the main text, 24 in the appendix) and the ten tables it typesets (`reproduce/tables/`). Then
+`scripts/check_against_paper.py` compares them with the values printed in the paper (`reproduce/expected/`). With the
+included results the last line is `ALL MATCH`.
 
 | paper | produced by | from |
 |---|---|---|
-| Figure 1 (problem setup) | `paper/make_setup_fig.py`, `paper/figures/tmlr/setup_tikz.tex` | data |
-| Figure 2 (Duhamel-NO) | `paper/make_fig1_thumbs.py`, `paper/figures/06_duhamel/fig1/schematic_tikz.tex` | data |
-| Figure 3 (truncation cap) | `paper/make_theory_fig.py` | `results/phys/`, `results/analysis/` |
-| Figure 4 (rollouts) | `paper/make_rollout_fig.py` | data + checkpoint |
-| Figure 5 (error per frame, physical quantities) | `paper/make_evt_ab_fig.py`, `paper/make_physics_table.py` → `make_appendix_tables.py` | `results/phys/` |
-| Table 1 | `paper/tools/make_figs.py` → `paper/make_duhamel_macros.py` | `results/final/` |
-| ablation table | `paper/tools/make_figs.py` → `paper/make_appendix_tables.py` | `results/final/` |
-| appendix tables | `paper/tools/make_figs.py`, `make_units.py`, `paper/make_ac_table.py` → `paper/make_appendix_tables.py` | `results/` |
-| appendix figures | `paper/tools/make_figs.py`, `fig_design.py`, `paper/make_hyst_curves_fig.py`; with data: `make_energy_fig.py`, `make_gallery_fig.py` | `results/`; data |
-| numbers in the text | `paper/make_duhamel_macros.py` | all of the above |
+| Table 1 | `reproduce/tools/make_figs.py` → `reproduce/make_duhamel_macros.py` | `results/final/` |
+| Figure 3c (physical quantities) | `reproduce/make_physics_table.py` → `reproduce/make_appendix_tables.py` | `results/phys/` |
+| ablation table | `reproduce/tools/make_figs.py` → `reproduce/make_appendix_tables.py` | `results/final/` |
+| appendix tables | `reproduce/tools/make_figs.py`, `make_units.py`, `reproduce/make_ac_table.py` → `reproduce/make_appendix_tables.py` | `results/` |
+| numbers in the text | `reproduce/make_duhamel_macros.py` | all of the above |
 
 ## Step 3. Download the data and the trained models
 
 The data are on Hugging Face, behind an anonymous link for the review: <https://anonymous-hf.com/a/58mhxpc51v6u/>.
-Download the dataset into `./ferro_data` (it contains `d1/`, `d2/`, `hysteresis/` and `simulation/`; for the test sets
-only, `d1/metadata.csv` and `d2/` are enough), then link it into `$SCRATCH` (the symlinks copy nothing):
+The mirror has no `hf download`, and its file browser shows at most 1000 files per folder (D1 has 1001), so use
+`scripts/download.py`. It needs only the Python standard library, takes the file list from the dataset's `SHA256SUMS`,
+verifies every file and skips files that are already complete, so it can simply be rerun after an interruption:
+
+```bash
+python scripts/download.py data --out ./ferro_data                                   # everything, ~120 GB
+python scripts/download.py data --out ./ferro_data --dataset d1 d2                   # TDGL only, ~85 GB
+python scripts/download.py data --out ./ferro_data --dataset d1 --split test_interior test_edge   # D1 test set, 17 GB
+python scripts/download.py data --out ./ferro_data --metadata-only                   # metadata, checksums, inputs
+```
+
+Then link the data into `$SCRATCH` (the symlinks copy nothing):
 
 ```bash
 bash scripts/link_hf_data.sh ./ferro_data
@@ -85,8 +87,13 @@ The released files hold only the 10 ferroelectric layers, as `(401, 10, 64, 64)`
 and the raw `(64, 64, 18, 401)` FerroX extracts. Each trajectory's material (α, β, γ), time step and seed are in
 `data_generation/jobs_D1.txt` / `jobs_D2.txt`, and in the `metadata.csv` of each dataset.
 
-The trained models and the measured Fourier SSMs are at the same anonymous link. Their folders mirror `$SCRATCH`:
-download `bench_ckpt/` and `bench_cache/` into `$SCRATCH`, which puts every file in place.
+The 109 trained models and the measured Fourier SSMs (about 5 GB) are behind a second anonymous link,
+<https://anonymous-hf.com/a/MODEL_LINK_ID/>. Their folders mirror `$SCRATCH`, so downloading them into `$SCRATCH` puts every file in place:
+
+```bash
+python scripts/download.py models --out "$SCRATCH"                             # all checkpoints and Fourier SSMs
+python scripts/download.py models --out "$SCRATCH" --include tdgl_duhamel_uno  # only Duhamel-NO on D1/D2
+```
 
 The Allen–Cahn data are not downloaded; generate them (minutes, deterministic):
 
@@ -120,7 +127,6 @@ configurations that lost this comparison; the paper reports the others. The cand
 ```bash
 bash scripts/evaluate_all.sh      # writes results/phys, results/res, results/curves (1 GPU, ~6 h)
 bash scripts/make_tables.sh
-bash scripts/make_figures_from_data.sh
 ```
 
 To re-score one released model at its training-time evaluation, add `--eval_only` to its line in

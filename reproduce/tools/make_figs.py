@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""paper/tools/make_figs.py -- shared tables, figures and numbers of the paper, regenerated from the result files.
+"""reproduce/tools/make_figs.py -- shared tables, figures and numbers of the paper, regenerated from the result files.
 
 Sources (never hand-typed): results/final (benchmark finals, val-selected via duhamel_no/summarize2.load),
 results/phys (physics metrics, speed), results/res (resolution transfer), results/analysis/probe_chaos.json

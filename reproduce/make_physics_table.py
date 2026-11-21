@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """make_physics_table.py -- tables/main_combined.tex: field errors (D1, D2, frame 1; from tables/tdgl_compact.tex, written by
-make_duhamel_macros.py from paper/tools) and physical-quantity errors on the D1 held-out materials (mean over training
-seeds, from results/phys via paper/tools/make_figs.phys_runs) for Duhamel-NO and every baseline.
+make_duhamel_macros.py from reproduce/tools) and physical-quantity errors on the D1 held-out materials (mean over training
+seeds, from results/phys via reproduce/tools/make_figs.phys_runs) for Duhamel-NO and every baseline.
 Also writes tables/app_physics_full.tex (all eight physical metrics, incl. domain size and wall density) for the appendix."""
 import os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
