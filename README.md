@@ -24,7 +24,7 @@ files, and compares them with the values printed in the paper. The last line sho
 | what | where |
 |---|---|
 | D1, D2 and hysteresis data, with the paper's splits | [anonymous link](https://anonymous-hf.com/a/58mhxpc51v6u/) (dataset) |
-| every trained model of the paper (109 checkpoints) and the measured Fourier SSMs | [anonymous link](https://anonymous-hf.com/a/MODEL_LINK_ID/) (models) |
+| every trained model of the paper (109 checkpoints) and the measured Fourier SSMs | [anonymous link](https://anonymous-hf.com/a/9z48lcxh6uv0/) (models) |
 
 The anonymous mirrors have no `hf download`, and their file browser shows at most 1000 files per folder (D1 has 1001),
 so download with `scripts/download.py` (standard library only). It verifies every file's SHA-256 and resumes after an

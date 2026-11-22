@@ -31,7 +31,7 @@ import urllib.request
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 DATA_LINK = "https://anonymous-hf.com/a/58mhxpc51v6u/"     # D1, D2, hysteresis
-MODEL_LINK = "https://anonymous-hf.com/a/MODEL_LINK_ID/"   # 109 checkpoints + Fourier SSMs
+MODEL_LINK = "https://anonymous-hf.com/a/9z48lcxh6uv0/"   # 109 checkpoints + Fourier SSMs
 DATASETS = ("d1", "d2", "hysteresis")
 UA = {"User-Agent": "Mozilla/5.0 (compatible; duhamel-no-download/1.0)"}  # the mirror rejects the default urllib agent
 

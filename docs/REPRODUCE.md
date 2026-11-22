@@ -88,7 +88,7 @@ and the raw `(64, 64, 18, 401)` FerroX extracts. Each trajectory's material (α,
 `data_generation/jobs_D1.txt` / `jobs_D2.txt`, and in the `metadata.csv` of each dataset.
 
 The 109 trained models and the measured Fourier SSMs (about 5 GB) are behind a second anonymous link,
-<https://anonymous-hf.com/a/MODEL_LINK_ID/>. Their folders mirror `$SCRATCH`, so downloading them into `$SCRATCH` puts every file in place:
+<https://anonymous-hf.com/a/9z48lcxh6uv0/>. Their folders mirror `$SCRATCH`, so downloading them into `$SCRATCH` puts every file in place:
 
 ```bash
 python scripts/download.py models --out "$SCRATCH"                             # all checkpoints and Fourier SSMs
